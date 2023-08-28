@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Основные финансовые показатели</title>
+    <link rel="stylesheet" href="main.css">
+    <style>
+        .footer{
+            top: 200px;
+        }
+    </style>
+    <script>
+        let prices = [0.73, 0.78, 0.77, 0.80, 0.81, 0.83, 0.86, 0.85, 0.85, 0.87, 0.81, 0.79, 0.77, 0.77, 0.76, 0.80, 0.78, 0.78, 0.77, 0.75];
+        let dates = [
+          '28.04.2023',
+          '27.04.2023',
+          '26.04.2023',
+          '25.04.2023',
+          '24.04.2023',
+          '21.04.2023',
+          '20.04.2023',
+          '19.04.2023',
+          '18.04.2023',
+          '17.04.2023',
+          '14.04.2023',
+          '13.04.2023',
+          '12.04.2023',
+          '11.04.2023',
+          '10.04.2023',
+          '07.04.2023',
+          '06.04.2023',
+          '05.04.2023',
+          '04.04.2023',
+          '03.04.2023'
+        ];
+
+        function calculate(){
+            let minPrice = Math.min(...prices);
+            let maxPrice = Math.max(...prices);
+            let sum = prices.reduce((acc, prices) => acc + prices, 0);
+            let mean = sum / prices.length;
+            let standardeviation = Math.sqrt(sum / prices.length);
+            let totalcapital = 18134260000 + ' руб.';
+        
+            document.getElementById('capitalization').textContent = totalcapital;
+            document.getElementById('minPrice').textContent = minPrice + ' руб.';
+            document.getElementById('maxPrice').textContent = maxPrice + ' руб.';
+            document.getElementById('standardDeviation').textContent = standardeviation + ' руб.';
+            let tablebody = document.getElementById('TableBody');
+            for (let i = 0; i < prices.length; i++){
+                let row = document.createElement('tr');
+                let dateCell = document.createElement('td');
+                let priceCell = document.createElement('td');
+                dateCell.textContent = dates[i];
+                priceCell.textContent = prices[i];
+                row.appendChild(dateCell);
+                row.appendChild(priceCell);
+                tablebody.appendChild(row);
+            }
+        };
+
+    </script>
+</head>
+<body onload="calculate()">
+    <div>
+        <div class="header">
+            <ul>
+                <li><img src="arrow.png" alt="arrow" class="arrow_img"></li>
+                <li><a href="index.html">О компании</a></li>
+                <li><a href="finance.html">Основные финансовые показатели</a></li>
+                <li><a href="contact.html">Контактные данные</a></li>
+                <li><a href="video.html">Видео</a></li>
+            </ul>
+        </div>
+        <div class="logotip"><img src="logo-tat.svg" alt="logo-tat"></div>
+    </div>
+    <div class="finance-pok"> 
+        <div>
+            <h1>Основные финансовые показатели</h1>
+        </div>
+        <table class="section-table">
+            <thead>
+            <tr>
+                <th>Дата</th>
+                <th>Цена закрытия (руб)</th>
+            </tr>
+            </thead>
+            <tbody id="TableBody"></tbody>
+        </table>
+        <div><button onclick='showPrices()' id="buttonprice">Показать цены</button></div>
+        <div id='section-prices' class="section-text">
+            <p>Минимальная цена: <span id="minPrice">...</span></p>
+            <p>Максимальная цена: <span id="maxPrice">...</span></p>
+            <p>Среднеквадратическое отклонение цены: <span id="standardDeviation">...</span></p>
+            <p>Капитализация: <span id="capitalization">...</span></p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <section class="footer-section">
+            <div class="footer-content">
+                <div class="zag">Таттелеком</div>
+                <p>О компании</p>
+                <p>Пресс-центр</p>
+                <p>Работа в компании</p>
+            </div>
+            <div>
+                <div class="zag">Частным клиентам</div>
+                <p>Мобильная связь</p>
+                <p>Интернет</p>
+                <p>Телевидение</p>
+            </div>
+            <div>
+                <div class="zag">Бизнесу</div>
+                <p>Решения для бизнеса</p>
+                <p>Мобильная связь</p>
+                <p>Интернет в офис</p>
+            </div>
+            <div>
+                <div class="zag">Партнерам</div>
+                <p>Поставщикам</p>
+                <p>Операторам связи</p>
+                <p>Дилерам</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        let text = document.getElementById('section-prices');
+        let moved = false;
+        function showPrices(){
+            if (moved == false){
+                text.style.display = 'grid';
+                moved = true;
+            }
+            else{
+                text.style.display = 'none';
+                moved = false;
+            }
+        }
+    </script>
+    
+</body>
+</html>
